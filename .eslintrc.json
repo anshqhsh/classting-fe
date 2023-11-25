@@ -64,7 +64,7 @@
       }
     ]
   },
-  "ignorePatterns": ["vite.config.ts"],
+  "ignorePatterns": ["vite.config.ts", "test-result-commit.js"],
   "globals": {
     "React": "writable"
   }

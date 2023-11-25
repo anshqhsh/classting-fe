@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from '@/App';
+
 import '@testing-library/jest-dom';
+import App from '@/App';
 
 // To Test
 

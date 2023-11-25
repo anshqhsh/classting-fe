@@ -1,0 +1,37 @@
+/* eslint-disable */
+const { execSync } = require('child_process');
+const { readFileSync } = require('fs');
+const path = require('path');
+
+module.exports = async ({ github, context }) => {
+  let testResultJson;
+  try {
+    execSync(
+      'yarn test --silent --runInBand --reporters=default --json --outputFile=test-result.json',
+      {
+        encoding: 'utf-8',
+        stdio: 'inherit',
+      }
+    );
+    const testResultPath = path.join(process.env.GITHUB_WORKSPACE, 'test-result.json');
+    const testResult = readFileSync(testResultPath, 'utf8');
+    testResultJson = JSON.parse(testResult);
+  } catch (error) {
+    console.error('Error running tests:', error);
+    return;
+  }
+
+  // 테스트 결과 처리 및 댓글 생성 로직...
+
+  if (context.issue.number) {
+    // 이슈 댓글 생성 로직
+    github.rest.issues.createComment({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      issue_number: context.issue.number,
+      body: comment,
+    });
+  } else {
+    console.log('No issue number available for comment');
+  }
+};
