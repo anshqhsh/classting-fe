@@ -2,8 +2,7 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true,
-    "module": "node"
+    "node": true
   },
   "parser": "@typescript-eslint/parser",
   "extends": [
@@ -19,6 +18,9 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {}
     }
   },
   "parserOptions": {
@@ -37,7 +39,20 @@
     "react/jsx-filename-extension": 0,
     "react/jsx-one-expression-per-line": 0,
     "no-nested-ternary": 0,
-    "react-hooks/rules-of-hooks": "error", // Hook 규칙을 체크합니다."react-hooks/exhaustive-deps": "error",// useEffect의 의존성 배열을 체크합니다.
+    "react-hooks/rules-of-hooks": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/__tests__/**",
+          "**/*.test.js",
+          "**/*.spec.js",
+          "**/*.setup.js",
+          "**/*.test.tsx",
+          "**/*.spec.tsx"
+        ]
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
