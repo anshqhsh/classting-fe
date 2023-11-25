@@ -1,1 +1,2 @@
-import '@testing-library/jest-dom';
+/* eslint @typescript-eslint/no-var-requires: 0 */
+require('@testing-library/jest-dom');

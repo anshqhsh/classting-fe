@@ -1,11 +1,13 @@
-export default {
-  testEnvironment: 'jsdom',
+module.exports = {
   transform: {
-    '^.+\\.tsx?$': 'ts-jest',
+    '^.+\\.[jt]sx?$': ['babel-jest'],
   },
+  modulePaths: ['<rootDir>/src/'],
   moduleNameMapper: {
-    '^.+\\.svg$': 'jest-svg-transformer',
-    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!axios)/'],
+  setupFilesAfterEnv: ['./jest.setup.js'],
+  testTimeout: 10000,
+  testEnvironment: 'jsdom',
 };
