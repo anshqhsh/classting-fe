@@ -20,7 +20,7 @@ module.exports = async ({ github, context }) => {
     return;
   }
 
-  // 테스트 결과 처리 및 마크다운 변환 로직 추가
+  // 테스트 결과 처리 및 마크다운 변환 로직
   const resultArray = testResultJson.testResults.map((resultItem) => {
     let ancestorTitle = '';
     const testCaseResult = resultItem.assertionResults.map((test) => {
@@ -30,18 +30,14 @@ module.exports = async ({ github, context }) => {
     return { ancestorTitle, testCaseResult };
   });
 
-  function convertToMarkdownList(data) {
-    let result = '';
-    data.forEach((item) => {
-      result += `- ${item.ancestorTitle}\n`;
-      item.testCaseResult.forEach((testCase) => {
-        result += `  - ${testCase.status === 'passed' ? '✅' : '❌'} ${testCase.testName}\n`;
-      });
-    });
-    return result;
-  }
-
   const comment = `테스트 결과:\n\`\`\`\n${convertToMarkdownList(resultArray)}\n\`\`\``;
+
+  console.log('Owner:', context.repo.owner);
+  console.log('Repo:', context.repo.repo);
+  console.log('Issue Number:', context.issue.number);
+  console.log('Comment Body:', comment);
+  console.log('resultArray:', resultArray, 'x//');
+  console.log('comment', comment);
 
   // 이슈 댓글 생성 로직
   if (context.issue.number) {
@@ -55,3 +51,13 @@ module.exports = async ({ github, context }) => {
     console.log('No issue number available for comment');
   }
 };
+
+function convertToMarkdownList(data) {
+  let result = '';
+  data.forEach((item) => {
+    item.testCaseResult.forEach((testCase) => {
+      result += `- ${testCase.status === 'passed' ? '✅' : '❌'} ${testCase.testName}\n`;
+    });
+  });
+  return result;
+}
