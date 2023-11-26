@@ -1,4 +1,3 @@
-/* eslint-disable */
 const { execSync } = require('child_process');
 const { readFileSync } = require('fs');
 const path = require('path');
@@ -21,10 +20,31 @@ module.exports = async ({ github, context }) => {
     return;
   }
 
-  // 테스트 결과 처리 및 댓글 생성 로직...
+  // 테스트 결과 처리 및 마크다운 변환 로직 추가
+  const resultArray = testResultJson.testResults.map((resultItem) => {
+    let ancestorTitle = '';
+    const testCaseResult = resultItem.assertionResults.map((test) => {
+      ancestorTitle = test.ancestorTitles[0];
+      return { testName: test.title, status: test.status };
+    });
+    return { ancestorTitle, testCaseResult };
+  });
 
+  function convertToMarkdownList(data) {
+    let result = '';
+    data.forEach((item) => {
+      result += `- ${item.ancestorTitle}\n`;
+      item.testCaseResult.forEach((testCase) => {
+        result += `  - ${testCase.status === 'passed' ? '✅' : '❌'} ${testCase.testName}\n`;
+      });
+    });
+    return result;
+  }
+
+  const comment = `테스트 결과:\n\`\`\`\n${convertToMarkdownList(resultArray)}\n\`\`\``;
+
+  // 이슈 댓글 생성 로직
   if (context.issue.number) {
-    // 이슈 댓글 생성 로직
     github.rest.issues.createComment({
       owner: context.repo.owner,
       repo: context.repo.repo,
