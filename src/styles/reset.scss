@@ -4,6 +4,11 @@
   margin: 0;
 }
 
+#root {
+  max-width: var(--width-desktop);
+  margin: 0 auto;
+}
+
 html,
 body {
   height: 100%;
