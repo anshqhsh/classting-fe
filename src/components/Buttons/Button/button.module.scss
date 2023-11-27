@@ -1,0 +1,27 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-gray);
+  color: var(--color-black-80);
+  white-space: nowrap;
+  &.primary {
+    &.actived {
+      color: var(--color-blue-main);
+      border-color: var(--color-sub-blue-sky);
+    }
+    &:hover {
+      background-color: var(--color-blue-main);
+      color: var(--color-white-100);
+    }
+  }
+  &.secondary {
+    &.actived {
+      color: var(--color-white-100);
+      background-color: var(--color-sub-blue-sky);
+      border-color: var(--color-white-60);
+    }
+  }
+}
