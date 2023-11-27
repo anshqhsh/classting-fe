@@ -40,6 +40,7 @@
     "react/jsx-one-expression-per-line": 0,
     "no-nested-ternary": 0,
     "react-hooks/rules-of-hooks": "error",
+    "react/require-default-props": 0,
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -62,7 +63,9 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "react/jsx-props-no-spreading": 0,
+    "react/button-has-type": 0
   },
   "ignorePatterns": ["vite.config.ts", "test-result-commit.js"],
   "globals": {
