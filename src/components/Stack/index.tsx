@@ -1,7 +1,6 @@
-import React from 'react';
-import styles from './stack.module.scss';
 import { PropsWithChildren } from 'react';
 import classNames from 'classnames';
+import styles from './stack.module.scss';
 
 interface IProps {
   gap?: number;

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './loadingUI.module.scss';
 
 function LoadingUI({ type = 'center' }: { type: 'center' | 'component' }) {
