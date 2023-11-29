@@ -14,44 +14,53 @@ import styles from './mainPage.module.scss';
 function MainPage() {
   const [category, setCategory] = useState<string>('');
   const [difficulty, setDifficulty] = useState<string>('');
-  const [qustionsNum, setQustionsNum] = useState<string>('');
+  const [amount, setAmount] = useState<string>('');
+
   const navigate = useNavigate();
+
+  const categoryText =
+    SELECT_CATEGORY_VALUE.find((value) => value.value === category)?.text || '카테고리 선택';
+  const difficultyText =
+    SELECT_DIFFICULTY_VALUE.find((value) => value.value === difficulty)?.text || '난이도 선택';
+  const questionNumText =
+    SELECT_QUESTIONS_NUM_VALUE.find((value) => value.value === amount)?.text || '문제 갯수';
+
   return (
     <div className={styles.mainWrapper}>
       <Stack gap={24}>
         <Select setValue={setCategory}>
           <Select.Trigger>
             <Typography className={styles.label} variant="button">
-              {category || '카테고리 선택'}
+              {categoryText}
             </Typography>
           </Select.Trigger>
           <Select.ItemUl>
             {SELECT_CATEGORY_VALUE.map((v, idx) => (
-              <Select.Item key={v.value} value={v.text} index={idx} />
+              <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
             ))}
           </Select.ItemUl>
         </Select>
         <Select setValue={setDifficulty}>
           <Select.Trigger>
             <Typography className={styles.label} variant="button">
-              {difficulty || '난이도 선택'}
+              {difficultyText}
             </Typography>
           </Select.Trigger>
           <Select.ItemUl>
             {SELECT_DIFFICULTY_VALUE.map((v, idx) => (
-              <Select.Item key={v.value} value={v.text} index={idx} />
+              <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
             ))}
           </Select.ItemUl>
         </Select>
-        <Select setValue={setQustionsNum}>
+        <Select setValue={setAmount}>
           <Select.Trigger>
             <Typography className={styles.label} variant="button">
-              {qustionsNum || '문제 갯수'}
+              {questionNumText}
             </Typography>
           </Select.Trigger>
           <Select.ItemUl>
             {SELECT_QUESTIONS_NUM_VALUE.map((v, idx) => (
-              <Select.Item key={v.value} value={v.text} index={idx} />
+              <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
             ))}
           </Select.ItemUl>
         </Select>
