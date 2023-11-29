@@ -67,7 +67,15 @@ Select.ItemUl = function SelectTrigger({ children }: { children: ReactNode }) {
   return <>{renderUi()}</>;
 };
 
-Select.Item = function SelectItem({ value, index }: { value: string; index: number }) {
+Select.Item = function SelectItem({
+  value,
+  index,
+  text,
+}: {
+  value: string;
+  index: number;
+  text: string;
+}) {
   const { onOpenChange, selectedIndex, setIndex, dispatch } = useSelectContext();
 
   useEffect(() => {
@@ -87,7 +95,7 @@ Select.Item = function SelectItem({ value, index }: { value: string; index: numb
   return (
     <li className={isActive ? classNames(styles.selectItem, styles.active) : styles.selectItem}>
       <button className={styles.button} type="button" onClick={onClickItem}>
-        <Typography variant="button">{value}</Typography>
+        <Typography variant="button">{text}</Typography>
       </button>
     </li>
   );
