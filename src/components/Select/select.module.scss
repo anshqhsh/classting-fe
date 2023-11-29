@@ -1,0 +1,37 @@
+.selectContainer {
+  width: 280px;
+  position: relative;
+  border-bottom: 1px solid var(--color-gray);
+  .selectTrigger {
+    padding: 4px 8px;
+    width: 100%;
+  }
+}
+
+.ulContainer {
+  position: absolute;
+  background-color: var(--color-white-80);
+  width: 100%;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  margin-top: 4px;
+  z-index: var(--z-index);
+  &:focus {
+    outline: none;
+  }
+  ​ &:focus-visible {
+    outline: none;
+  }
+}
+
+.selectItem {
+  &:hover {
+    background-color: var(--color-black-4);
+  }
+  .button {
+    width: 100%;
+  }
+}
+.active {
+  background-color: var(--color-sub-blue-sky);
+}
