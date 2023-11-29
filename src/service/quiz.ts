@@ -23,6 +23,6 @@ export default async function getQuizApi(props?: {
   if (category && amount !== 'default') params.category = category;
   if (difficulty && amount !== 'default') params.difficulty = difficulty;
 
-  const data = await axiosInstance.get('/api.php', { params });
+  const { data } = await axiosInstance.get('/api.php', { params });
   return data;
 }
