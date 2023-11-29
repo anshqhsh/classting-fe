@@ -16,6 +16,9 @@
   border-radius: 4px;
   margin-top: 4px;
   z-index: var(--z-index);
+  max-height: 240px;
+  overflow: scroll;
+
   &:focus {
     outline: none;
   }
