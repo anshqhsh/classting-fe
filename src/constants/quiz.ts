@@ -51,7 +51,7 @@ const SELECT_QUESTIONS_NUM_VALUE = [
     text: '5',
   },
   {
-    value: 'default',
+    value: '10',
     text: '10',
   },
   {
