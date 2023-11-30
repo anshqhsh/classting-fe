@@ -9,7 +9,7 @@ function Divider({
   [x: string]: any;
 }) {
   const style = {
-    backgroundColor: color || 'var(--colors-green-main)',
+    backgroundColor: color || 'var(--color-green-main)',
     height: `${size}px` || '1px',
   };
 

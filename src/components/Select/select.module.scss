@@ -29,12 +29,12 @@
 
 .selectItem {
   &:hover {
-    background-color: var(--colors-green-bg);
+    background-color: var(--color-green-bg);
   }
   .button {
     width: 100%;
   }
 }
 .active {
-  background-color: var(--colors-green-sub);
+  background-color: var(--color-green-sub);
 }

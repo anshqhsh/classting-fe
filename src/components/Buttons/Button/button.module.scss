@@ -10,11 +10,11 @@
   white-space: nowrap;
   &.primary {
     &.actived {
-      color: var(--colors-green-main);
-      border-color: var(--colors-green-main);
+      color: var(--color-green-main);
+      border-color: var(--color-green-main);
     }
     &:hover {
-      background-color: var(--colors-green-main);
+      background-color: var(--color-green-main);
       color: var(--color-white-100);
     }
   }
