@@ -1,3 +1,4 @@
+import { IQuizResponse } from '@/types/quiz';
 import axiosInstance from '@/utils/axios';
 
 /**
@@ -6,11 +7,11 @@ import axiosInstance from '@/utils/axios';
  * @param {number} [category] - 퀴즈 카테고리.
  * @param {string} [difficulty] - 문제 난이도 ['easy', 'medium', 'hard']
  */
-export default async function getQuizApi(props?: {
+const getQuizApi = async (props?: {
   amount?: string;
   category?: string;
   difficulty?: string;
-}) {
+}): Promise<IQuizResponse> => {
   const { amount, category, difficulty } = props || {};
 
   const params: {
@@ -25,4 +26,7 @@ export default async function getQuizApi(props?: {
 
   const { data } = await axiosInstance.get('/api.php', { params });
   return data;
-}
+};
+
+// eslint-disable-next-line import/prefer-default-export
+export { getQuizApi };

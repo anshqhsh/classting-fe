@@ -9,9 +9,10 @@ import {
   SELECT_QUESTIONS_NUM_VALUE,
 } from '@/constants/quiz';
 import { useNavigate } from 'react-router-dom';
-import getQuizApi from '@/service/quiz';
+
 import LoadingUI from '@/components/LoadingUI';
 import useQuizStore from '@/store/useQuizStore';
+import { getQuizApi } from '@/service/quiz';
 import styles from './mainPage.module.scss';
 
 function MainPage() {

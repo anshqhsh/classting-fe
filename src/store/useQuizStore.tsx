@@ -1,13 +1,5 @@
+import { IQuizList } from '@/types/quiz';
 import { create } from 'zustand';
-
-interface IQuizList {
-  type: string;
-  difficulty: string;
-  category: string;
-  question: string;
-  correct_answer: string;
-  incorrect_answers: string[];
-}
 
 interface IQuizStore {
   quizList: IQuizList[];
