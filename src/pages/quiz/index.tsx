@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import useQuizStore from '@/store/useQuizStore';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from '@/components/Buttons/Button';
@@ -11,10 +11,8 @@ import styles from './quiz.module.scss';
 
 function QuizPage() {
   const quizList = useQuizStore((state) => state.quizList);
-  const [quizProgress, setQuizProgress] = useState<{ currentQuizIdx: number; answers: boolean[] }>({
-    currentQuizIdx: 0,
-    answers: [],
-  });
+  const quizProgress = useQuizStore((state) => state.quizProgress);
+  const setQuizProgress = useQuizStore((state) => state.setQuizProgress);
 
   const navigate = useNavigate();
 
@@ -46,13 +44,7 @@ function QuizPage() {
       navigate('/result');
     }
 
-    setQuizProgress((_prev) => {
-      const newAnswers = [..._prev.answers, answer];
-      return {
-        currentQuizIdx: nextIndex,
-        answers: newAnswers,
-      };
-    });
+    setQuizProgress(answer);
     if (answer) {
       return toast.success('정답입니다.');
     }
