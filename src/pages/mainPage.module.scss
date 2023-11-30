@@ -1,12 +1,13 @@
 .mainWrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   flex-direction: column;
+  width: 100%;
+  min-width: var(--min-width);
   max-width: var(--width-mobile);
 
   height: 100%;
-  margin: 0 auto;
 }
 
 .quizButton {
