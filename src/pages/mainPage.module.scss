@@ -1,0 +1,15 @@
+.mainWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: var(--width-mobile);
+
+  height: 100%;
+  margin: 0 auto;
+}
+
+.quizButton {
+  width: 100%;
+  margin-top: 100px;
+}
