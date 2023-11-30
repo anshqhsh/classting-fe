@@ -1,40 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { convertSecToSecOrMinText } from '@/utils';
+import useQuizStore from '@/store/useQuizStore';
 import styles from './timer.module.scss';
 import Typography from '../Typography';
 
-// import { convertMsToSecOrMin } from '@/utils/time';
-// import { useResultFeedbackStore } from '@/zustand/gugudanStore';
-
-interface IProps {
-  isStopped?: boolean;
-  onTimeout?: () => void;
-}
-
-function Timer({ isStopped = false, onTimeout }: IProps) {
-  const [count, setCount] = useState(0);
-  // const count = useResultFeedbackStore((state) => state.totalTime);
-  // const incrementCount = useResultFeedbackStore((state) => state.setTotalTime);
+function Timer() {
+  const timerValue = useQuizStore((state) => state.timerValue);
+  const setTimerValue = useQuizStore((state) => state.setTimerValue);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setCount((_count) => _count + 1);
+      setTimerValue();
     }, 1000); // 1000ms마다 호출
 
-    if (isStopped) {
-      clearInterval(id);
-      if (onTimeout) {
-        onTimeout();
-      }
-    }
-
     return () => clearInterval(id);
-  }, [isStopped, onTimeout]);
+  }, [setTimerValue]);
 
   return (
     <div className={styles.container}>
       <Typography className={styles.text} variant="body1">
-        {`경과 시간: ${convertSecToSecOrMinText(count)}`}
+        {`경과 시간: ${convertSecToSecOrMinText(timerValue)}`}
       </Typography>
     </div>
   );
