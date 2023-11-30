@@ -10,14 +10,14 @@
 
 .ulContainer {
   position: absolute;
-  background-color: var(--color-white-80);
+  background-color: var(--color-white-90);
   width: 100%;
   border: 1px solid var(--color-gray);
   border-radius: 4px;
   margin-top: 4px;
   z-index: var(--z-index);
   max-height: 240px;
-  overflow: scroll;
+  overflow-y: scroll;
 
   &:focus {
     outline: none;
@@ -29,12 +29,12 @@
 
 .selectItem {
   &:hover {
-    background-color: var(--color-black-4);
+    background-color: var(--colors-green-bg);
   }
   .button {
     width: 100%;
   }
 }
 .active {
-  background-color: var(--color-sub-blue-sky);
+  background-color: var(--colors-green-sub);
 }
