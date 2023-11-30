@@ -18,5 +18,28 @@ function shuffleArray<T>(array: Array<T>): Array<T> {
   return shuffledArray;
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { shuffleArray };
+/**
+ * 초(second)를 분과 초 형식의 텍스트로 변환하는 함수.
+ * @param {number} second - 변환할 시간(초 단위).
+ * @returns {string} 분과 초 형식으로 변환된 시간을 나타내는 문자열.
+ */
+function convertSecToSecOrMinText(second: number): string {
+  const minutes = Math.floor(second / 60);
+  const seconds = second % 60;
+  const flooredSeconds = Math.floor(seconds);
+
+  let convertedTime = '';
+
+  if (minutes > 0) {
+    convertedTime += `${minutes}분 `;
+    if (flooredSeconds !== 0) {
+      convertedTime += `${flooredSeconds}초`;
+    }
+  } else {
+    convertedTime += `${seconds}초`;
+  }
+
+  return convertedTime;
+}
+
+export { shuffleArray, convertSecToSecOrMinText };
