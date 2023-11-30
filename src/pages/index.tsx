@@ -41,54 +41,49 @@ function MainPage() {
   const questionNumText =
     SELECT_QUESTIONS_NUM_VALUE.find((value) => value.value === amount)?.text || '문제 갯수';
 
+  if (isLoading) return <LoadingUI type="center" />;
   return (
-    <div>
-      {isLoading ? (
-        <LoadingUI type="center" />
-      ) : (
-        <div className={styles.mainWrapper}>
-          <Stack gap={24}>
-            <Select setValue={setCategory}>
-              <Select.Trigger>
-                <Typography className={styles.label} variant="button">
-                  {categoryText}
-                </Typography>
-              </Select.Trigger>
-              <Select.ItemUl>
-                {SELECT_CATEGORY_VALUE.map((v, idx) => (
-                  <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
-                ))}
-              </Select.ItemUl>
-            </Select>
-            <Select setValue={setDifficulty}>
-              <Select.Trigger>
-                <Typography className={styles.label} variant="button">
-                  {difficultyText}
-                </Typography>
-              </Select.Trigger>
-              <Select.ItemUl>
-                {SELECT_DIFFICULTY_VALUE.map((v, idx) => (
-                  <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
-                ))}
-              </Select.ItemUl>
-            </Select>
-            <Select setValue={setAmount}>
-              <Select.Trigger>
-                <Typography className={styles.label} variant="button">
-                  {questionNumText}
-                </Typography>
-              </Select.Trigger>
-              <Select.ItemUl>
-                {SELECT_QUESTIONS_NUM_VALUE.map((v, idx) => (
-                  <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
-                ))}
-              </Select.ItemUl>
-            </Select>
+    <div className={styles.mainWrapper}>
+      <Stack gap={24}>
+        <Select setValue={setCategory}>
+          <Select.Trigger>
+            <Typography className={styles.label} variant="button">
+              {categoryText}
+            </Typography>
+          </Select.Trigger>
+          <Select.ItemUl>
+            {SELECT_CATEGORY_VALUE.map((v, idx) => (
+              <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
+            ))}
+          </Select.ItemUl>
+        </Select>
+        <Select setValue={setDifficulty}>
+          <Select.Trigger>
+            <Typography className={styles.label} variant="button">
+              {difficultyText}
+            </Typography>
+          </Select.Trigger>
+          <Select.ItemUl>
+            {SELECT_DIFFICULTY_VALUE.map((v, idx) => (
+              <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
+            ))}
+          </Select.ItemUl>
+        </Select>
+        <Select setValue={setAmount}>
+          <Select.Trigger>
+            <Typography className={styles.label} variant="button">
+              {questionNumText}
+            </Typography>
+          </Select.Trigger>
+          <Select.ItemUl>
+            {SELECT_QUESTIONS_NUM_VALUE.map((v, idx) => (
+              <Select.Item key={v.value} value={v.value} text={v.text} index={idx} />
+            ))}
+          </Select.ItemUl>
+        </Select>
 
-            <Button onClick={onClickGetQuestions}>퀴즈 풀기</Button>
-          </Stack>
-        </div>
-      )}
+        <Button onClick={onClickGetQuestions}>퀴즈 풀기</Button>
+      </Stack>
     </div>
   );
 }
