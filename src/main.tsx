@@ -5,11 +5,14 @@ import '@/styles/global.scss';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import ToastProvider from './components/Providers/ToastProvider';
+import Layout from './components/Layout/layout';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Layout>
+        <App />
+      </Layout>
       <ToastProvider />
     </BrowserRouter>
   </React.StrictMode>

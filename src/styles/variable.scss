@@ -13,6 +13,10 @@
 
   --color-blue-main: #3478f6;
 
+  --color-green-main: rgb(0, 200, 150);
+  --color-green-sub: rgb(98, 241, 189);
+  --color-green-bg: rgb(199, 240, 221);
+
   --color-sub-blue-sky: #82b0f4;
 
   --width-mobile: 768px;
@@ -20,4 +24,9 @@
   --width-desktop: 1280px;
 
   --z-index: 100;
+
+  --min-width: 240px;
+  --max-width: 560px;
+
+  --header-height: 48px;
 }
