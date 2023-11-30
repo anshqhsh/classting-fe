@@ -15,6 +15,7 @@ function QuizPage() {
     currentQuizIdx: 0,
     answers: [],
   });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,6 +53,10 @@ function QuizPage() {
         answers: newAnswers,
       };
     });
+    if (answer) {
+      return toast.success('정답입니다.');
+    }
+    return toast.success('오답입니다.');
   };
 
   if (quizList.length === 0 || quizProgress.currentQuizIdx >= quizList.length)
@@ -64,7 +69,7 @@ function QuizPage() {
       </div>
       <Stack>
         {quizAnswers.map((v) => (
-          <Button key={v.text} onClick={onClickAnswer}>
+          <Button key={v.text} onClick={() => onClickAnswer(v.isCorrect)}>
             {atob(v.text)}
           </Button>
         ))}
