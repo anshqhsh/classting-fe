@@ -10,7 +10,7 @@ import LoadingUI from '@/components/LoadingUI';
 import styles from './quiz.module.scss';
 
 function QuizPage() {
-  const { quizList } = useQuizStore();
+  const quizList = useQuizStore((state) => state.quizList);
   const [quizProgress, setQuizProgress] = useState<{ currentQuizIdx: number; answers: boolean[] }>({
     currentQuizIdx: 0,
     answers: [],

@@ -21,7 +21,7 @@ function MainPage() {
   const [amount, setAmount] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { setQuizList } = useQuizStore();
+  const setQuizList = useQuizStore((state) => state.setQuizList);
 
   const navigate = useNavigate();
 
