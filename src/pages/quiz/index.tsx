@@ -1,8 +1,5 @@
-import useQuizStore from '@/store/useQuizStore';
-
 function QuizPage() {
-  const { quizList } = useQuizStore();
-  console.log(quizList);
+  // const { quizList } = useQuizStore();
   return <div>QuizPage</div>;
 }
 export default QuizPage;

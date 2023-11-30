@@ -34,4 +34,3 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const script = require('./test-result-commit.js')
-            console.log(script({github, context}))
