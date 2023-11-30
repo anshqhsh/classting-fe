@@ -7,7 +7,6 @@ import Button from '@/components/Buttons/Button';
 import Stack from '@/components/Stack';
 import { shuffleArray } from '@/utils';
 import LoadingUI from '@/components/LoadingUI';
-import styles from './quiz.module.scss';
 
 function QuizPage() {
   const { quizList } = useQuizStore();
