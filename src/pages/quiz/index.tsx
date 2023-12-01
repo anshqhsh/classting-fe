@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable camelcase */
 import useQuizStore from '@/store/useQuizStore';
 import { useEffect, useMemo, useState } from 'react';
@@ -19,11 +20,21 @@ function QuizPage() {
   const setNoteQuizList = useAnswerNoteStore((state) => state.setQuizList);
 
   const [createdAt, setCreatedAt] = useState<number>();
+  const [isShowNextButton, setIsShowNextButton] = useState(false);
+  const [currentAnswer, setCurrentAnswer] = useState<{ answer: boolean; selectAnswer: string }>();
 
   // 현재 문제 시간 설정
   useEffect(() => {
     setCreatedAt(Date.now());
   }, []);
+
+  useEffect(() => {
+    if (currentAnswer) {
+      setIsShowNextButton(true);
+    } else {
+      setIsShowNextButton(false);
+    }
+  }, [currentAnswer]);
 
   const navigate = useNavigate();
 
@@ -48,7 +59,10 @@ function QuizPage() {
     return shuffleArray(answers);
   }, [quizList, quizProgress]);
 
-  const onClickAnswer = (answer: boolean, selectAnswer: string) => {
+  const onClickAnswer = () => {
+    if (!currentAnswer) return;
+
+    const { answer, selectAnswer } = currentAnswer;
     const nextIndex = quizProgress.currentQuizIdx + 1;
 
     if (nextIndex >= quizList.length) {
@@ -57,6 +71,7 @@ function QuizPage() {
 
     setQuizProgress(answer);
     if (answer) {
+      setCurrentAnswer(undefined);
       return toast.success('정답입니다.');
     }
     // 틀린정답을 고른 경우
@@ -68,6 +83,7 @@ function QuizPage() {
     };
 
     setNoteQuizList(wrongAnswer);
+    setCurrentAnswer(undefined);
     return toast.success('오답입니다.');
   };
 
@@ -84,11 +100,28 @@ function QuizPage() {
       </div>
       <Stack>
         {quizAnswers.map((v) => (
-          <Button key={v.text} onClick={() => onClickAnswer(v.isCorrect, v.text)}>
+          <Button
+            key={v.text}
+            isActived={currentAnswer?.selectAnswer === v.text}
+            onClick={() => {
+              const current = {
+                answer: v.isCorrect,
+                selectAnswer: v.text,
+              };
+              setCurrentAnswer(current);
+            }}
+          >
             {atob(v.text)}
           </Button>
         ))}
       </Stack>
+      {isShowNextButton && (
+        <div className={styles.nextButtonWrapper}>
+          <Button variant="secondary" onClick={onClickAnswer}>
+            다음 문제
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

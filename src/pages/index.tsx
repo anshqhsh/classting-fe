@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom';
 import LoadingUI from '@/components/LoadingUI';
 import useQuizStore from '@/store/useQuizStore';
 import { getQuizApi } from '@/service/quiz';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 import styles from './mainPage.module.scss';
 
 function MainPage() {
@@ -26,12 +28,29 @@ function MainPage() {
   const navigate = useNavigate();
 
   const onClickGetQuestions = async () => {
-    setIsLoading(true);
-    const data = await getQuizApi({ amount, category, difficulty });
-    setIsLoading(false);
-
-    setQuizList(data.results);
-    navigate('/quiz');
+    try {
+      setIsLoading(true);
+      const data = await getQuizApi({ amount, category, difficulty });
+      setQuizList(data.results);
+      navigate('/quiz');
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.status) {
+        const { status } = error.response;
+        switch (status) {
+          case 429:
+            toast.error('요청이 너무 많습니다. 잠시 후 다시 시도해주세요.');
+            break;
+          case 500:
+            toast.error('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            break;
+          default:
+            toast.error('잘못된 요청입니다. 다시 시도해주세요.');
+            break;
+        }
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const categoryText =
