@@ -24,11 +24,23 @@ function ResultPage() {
 
   return (
     <div className={styles.container}>
-      <Stack className={styles.resultWrapper} gap={16}>
-        <Typography variant="label">소요시간 : {convertSecToSecOrMinText(timerValue)}</Typography>
-        <Typography variant="label">정답 갯수 : {correctCount}</Typography>
-        <Typography variant="label">오답 수 : {incorrectCount}</Typography>
-        <Typography variant="label">정오답 비율 : {correctRatio}</Typography>
+      <Stack className={styles.resultWrapper} gap={8}>
+        <Typography variant="label">소요시간 </Typography>
+        <Typography variant="main" className={styles.mainText}>
+          {convertSecToSecOrMinText(timerValue)}
+        </Typography>
+        <Typography variant="label">정답 갯수</Typography>
+        <Typography variant="main" className={styles.mainText}>
+          {`${correctCount} 개`}
+        </Typography>
+        <Typography variant="label">오답 수 </Typography>
+        <Typography variant="main" className={styles.mainText}>
+          {`${incorrectCount} 개`}
+        </Typography>
+        <Typography variant="label">정오답 비율</Typography>
+        <Typography variant="main" className={styles.mainText}>
+          {`${correctRatio} %`}
+        </Typography>
       </Stack>
       <div className={styles.chartWrapper}>
         <DoughnutChart
