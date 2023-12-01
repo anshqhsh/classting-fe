@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  gap: 16px;
+  @media (max-width: 560px) {
+    flex-direction: column;
+  }
+
+  .resultWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 2px 2px 2px 2px var(--color-shadow-20);
+    border-radius: 8px;
+  }
+  .chartWrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .mainText {
+    color: var(--color-green-main);
+  }
+}
+.buttonWrapper {
+  margin: 24px;
+  gap: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 560px) {
+    flex-direction: column;
+  }
+}

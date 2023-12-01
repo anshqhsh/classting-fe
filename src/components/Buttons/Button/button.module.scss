@@ -21,8 +21,11 @@
   &.secondary {
     &.actived {
       color: var(--color-white-100);
-      background-color: var(--color-sub-blue-sky);
+      background-color: var(--color-green-sub);
       border-color: var(--color-white-60);
+    }
+    &:hover {
+      background-color: var(--color-green-main);
     }
   }
 }
