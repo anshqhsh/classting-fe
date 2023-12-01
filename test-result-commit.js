@@ -32,13 +32,6 @@ module.exports = async ({ github, context }) => {
 
   const comment = `테스트 결과:\n\`\`\`\n${convertToMarkdownList(resultArray)}\n\`\`\``;
 
-  console.log('Owner:', context.repo.owner);
-  console.log('Repo:', context.repo.repo);
-  console.log('Issue Number:', context.issue.number);
-  console.log('Comment Body:', comment);
-  console.log('resultArray:', resultArray, 'x//');
-  console.log('comment', comment);
-
   // 이슈 댓글 생성 로직
   if (context.issue.number) {
     github.rest.issues.createComment({

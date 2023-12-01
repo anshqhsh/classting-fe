@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { COLORS } from '@/constants/style';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, TooltipItem } from 'chart.js/auto';
 
 ChartJS.register(ArcElement, Tooltip, Legend);

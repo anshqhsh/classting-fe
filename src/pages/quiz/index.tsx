@@ -1,18 +1,29 @@
 /* eslint-disable camelcase */
 import useQuizStore from '@/store/useQuizStore';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Button from '@/components/Buttons/Button';
 import Stack from '@/components/Stack';
 import { shuffleArray } from '@/utils';
 import LoadingUI from '@/components/LoadingUI';
+import Typography from '@/components/Typography';
+import useAnswerNoteStore from '@/store/useAnswerNoteStore';
 import styles from './quiz.module.scss';
 
 function QuizPage() {
   const quizList = useQuizStore((state) => state.quizList);
   const quizProgress = useQuizStore((state) => state.quizProgress);
   const setQuizProgress = useQuizStore((state) => state.setQuizProgress);
+
+  const setNoteQuizList = useAnswerNoteStore((state) => state.setQuizList);
+
+  const [createdAt, setCreatedAt] = useState<number>();
+
+  // 현재 문제 시간 설정
+  useEffect(() => {
+    setCreatedAt(Date.now());
+  }, []);
 
   const navigate = useNavigate();
 
@@ -37,7 +48,7 @@ function QuizPage() {
     return shuffleArray(answers);
   }, [quizList, quizProgress]);
 
-  const onClickAnswer = (answer: boolean) => {
+  const onClickAnswer = (answer: boolean, selectAnswer: string) => {
     const nextIndex = quizProgress.currentQuizIdx + 1;
 
     if (nextIndex >= quizList.length) {
@@ -48,6 +59,15 @@ function QuizPage() {
     if (answer) {
       return toast.success('정답입니다.');
     }
+    // 틀린정답을 고른 경우
+    const wrongAnswer = {
+      ...quizList[quizProgress.currentQuizIdx],
+      selectAnswer,
+      created_at: createdAt || 0,
+      solved_at: Date.now() || 0,
+    };
+
+    setNoteQuizList(wrongAnswer);
     return toast.success('오답입니다.');
   };
 
@@ -56,12 +76,15 @@ function QuizPage() {
 
   return (
     <div className={styles.container}>
+      <Typography variant="title">{`Q.${quizProgress.currentQuizIdx + 1}`}</Typography>
       <div className={styles.questionWrapper}>
-        {atob(quizList[quizProgress.currentQuizIdx].question)}
+        <Typography variant="main">
+          {atob(quizList[quizProgress.currentQuizIdx].question)}
+        </Typography>
       </div>
       <Stack>
         {quizAnswers.map((v) => (
-          <Button key={v.text} onClick={() => onClickAnswer(v.isCorrect)}>
+          <Button key={v.text} onClick={() => onClickAnswer(v.isCorrect, v.text)}>
             {atob(v.text)}
           </Button>
         ))}
