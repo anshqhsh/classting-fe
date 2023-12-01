@@ -5,7 +5,7 @@ import styles from './typography.module.scss';
 
 interface IProps {
   tag?: keyof JSX.IntrinsicElements;
-  variant: 'heading' | 'body1' | 'body2' | 'body3' | 'title' | 'button' | 'label';
+  variant: 'heading' | 'body1' | 'body2' | 'body3' | 'title' | 'button' | 'label' | 'main';
   className?: string;
 }
 
@@ -24,6 +24,7 @@ function Typography({
       title: 'p',
       button: 'p',
       label: 'p',
+      main: 'p',
     }[variant];
 
     return [
