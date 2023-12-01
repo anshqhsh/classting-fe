@@ -8,7 +8,7 @@ function Layout({ children }: { children: ReactNode }) {
     <div className={styles.container}>
       <Header />
       <Divider size={1} />
-      {children}
+      <div className={styles.mainWrapper}>{children}</div>
     </div>
   );
 }
